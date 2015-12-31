@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.5",
+    "redux": "^3.0.5"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "redux-devtools": "^3.0.1"
+  },
+  "scripts": {
+    "watch": "watchify -v -d main.js -t [ babelify --presets [ es2015 react ] ] -o static/bundle.js",
+    "build": "browserify -t [ babelify --presets [ es2015 react ] ] | uglifyjs -mc warnings=false > static/bundle.js"
+  }
+}
