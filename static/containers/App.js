@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import RecipeList from '../components/RecipeList'
 
 class App extends Component {
-  constructor(props) {
+ constructor(props) {
     super(props);
     this.state = {recipes : [
               {
