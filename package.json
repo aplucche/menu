@@ -12,7 +12,7 @@
     "redux-devtools": "^3.0.1"
   },
   "scripts": {
-    "watch": "watchify -v -d main.js -t [ babelify --presets [ es2015 react ] ] -o static/bundle.js",
-    "build": "browserify -t [ babelify --presets [ es2015 react ] ] | uglifyjs -mc warnings=false > static/bundle.js"
+    "watch": "watchify -v -d static/index.js -t [ babelify --presets [ es2015 react ] ] -o static/bundle.js",
+    "build": "browserify static/index.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs -mc warnings=false > static/bundle.js"
   }
 }
