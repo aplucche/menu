@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react'
 import RecipeList from '../components/RecipeList'
 import RecipeForm from '../components/RecipeForm'
 import fillerData from '../dev/FillerData'
+import ViewSelect from '../components/ViewSelect'
+import MenuView from '../components/MenuView'
 
 class App extends Component {
  constructor(props) {
@@ -34,7 +36,9 @@ class App extends Component {
     const { recipes } = this.state
     return (
       <div className='appContainer'>
-          <RecipeList recipes={ recipes } 
+        <ViewSelect />
+        <MenuView />
+        <RecipeList recipes={ recipes } 
                       editItem={this.editItem.bind(this)}
                       formCancelClick={this.formCancelClick.bind(this)}
                       formSaveClick={this.formSaveClick.bind(this)}

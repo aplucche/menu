@@ -18,17 +18,14 @@ input,textarea,button {
 .appContainer {
     margin-top: 20px;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: center;
+    align-items: center;
 }
 
-.editButton {
-}
-
-.notesButton {
-    margin-top: 5px;
-}
-.notesButtonContainer {
-    text-align: center;
+.viewSelectContainer {
+    display: flex;
+    justify-content: center;
 }
 
 .listContainer {
@@ -44,16 +41,6 @@ input,textarea,button {
     border-radius: 3px;
 }
 
-.listFirstRow {
-    display: Flex;
-    justify-content: space-between;
-}
-
-.formButtonRow {
-    display: flex;
-    justify-content: flex-end;
-}
-
 .formContainer {
     display: flex;
     flex-flow: column;
@@ -62,6 +49,26 @@ input,textarea,button {
     padding: 5px 5px 5px 5px;
     border: solid 1px lightgrey;
     border-radius: 3px;
+}
+
+.editButton {
+}
+
+.notesButton {
+    margin-top: 5px;
+}
+.notesButtonContainer {
+    text-align: center;
+}
+
+.listFirstRow {
+    display: Flex;
+    justify-content: space-between;
+}
+
+.formButtonRow {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .formContainer input,textarea{
