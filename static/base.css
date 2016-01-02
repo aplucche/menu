@@ -33,3 +33,8 @@
     display: Flex;
     justify-content: space-between;
 }
+
+.formButtonRow {
+    display: flex;
+    justify-content: center;
+}
