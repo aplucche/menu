@@ -23,6 +23,12 @@ class App extends Component {
             (recipe.id===id) ? Object.assign({}, recipe, {'isSelected':!recipe.isSelected}) : recipe)
     this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
   }
+  formSaveClick(id, updatedRecipe) {
+    updatedRecipe.isEditing = false
+    var editedRecipes = this.state.recipes.map(recipe => 
+            (recipe.id===id) ? Object.assign({}, recipe, updatedRecipe) : recipe)
+    this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
+  }
 
   render() {
     const { recipes } = this.state
@@ -31,6 +37,7 @@ class App extends Component {
           <RecipeList recipes={ recipes } 
                       editItem={this.editItem.bind(this)}
                       formCancelClick={this.formCancelClick.bind(this)}
+                      formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
           />       
       </div>
