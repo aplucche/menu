@@ -4,12 +4,12 @@ import RecipeForm from './RecipeForm'
 
 class RecipeList extends Component {
   render() {
-    const { recipes, editItem, formCancelClick} = this.props
+    const { recipes, editItem, formCancelClick, toggleSelected } = this.props
     return (
       <div className='listContainer'>
           {recipes.map(recipe => (recipe.isEditing === true) 
             ? <RecipeForm key={recipe.id} recipe={recipe} formCancelClick={formCancelClick}/>
-            :<RecipeItem key={recipe.id} recipe={recipe} editItem={editItem}/>)}
+            :<RecipeItem key={recipe.id} recipe={recipe} editItem={editItem} toggleSelected={toggleSelected}/>)}
       </div>
     )
   }
