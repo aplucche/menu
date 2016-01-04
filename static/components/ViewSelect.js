@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react'
 
 class ViewSelect extends Component {
   render() {
+    const { changeView } = this.props 
     return (
       <div className='viewSelectContainer'>
-        <button>Recipe View</button>
-        <button>Menu View</button>
+        <button onClick={() => changeView('RecipeView') }>Recipe View</button>
+        <button onClick={() => changeView('MenuView') }>Menu View</button>
       </div>
       )
   }

@@ -31,19 +31,27 @@ class App extends Component {
             (recipe.id===id) ? Object.assign({}, recipe, updatedRecipe) : recipe)
     this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
   }
+  changeView(viewName) {
+    this.setState(Object.assign({}, this.state, {'view': viewName}))
+  }
 
   render() {
     const { recipes } = this.state
     return (
       <div className='appContainer'>
-        <ViewSelect />
-        <MenuView />
-        <RecipeList recipes={ recipes } 
+        <ViewSelect changeView={this.changeView.bind(this)}/>
+        {(() => {
+          switch (this.state.view) {
+            case "RecipeView":   return (
+                    <RecipeList recipes={ recipes } 
                       editItem={this.editItem.bind(this)}
                       formCancelClick={this.formCancelClick.bind(this)}
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
-          />       
+          />)
+            case "MenuView": return <MenuView />
+          }
+        })()} 
       </div>
     )
   }
