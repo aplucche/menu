@@ -49,7 +49,7 @@ class App extends Component {
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
           />)
-            case "MenuView": return <MenuView />
+            case "MenuView": return <MenuView recipes={ recipes }/>
           }
         })()} 
       </div>
