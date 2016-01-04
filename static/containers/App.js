@@ -1,14 +1,17 @@
 import React, { Component, PropTypes } from 'react'
 import RecipeList from '../components/RecipeList'
 import RecipeForm from '../components/RecipeForm'
-import fillerData from '../dev/FillerData'
 import ViewSelect from '../components/ViewSelect'
 import MenuView from '../components/MenuView'
+
+import fillerData from '../dev/FillerData'
+import menuStyleData from '../dev/MenuStyleData'
 
 class App extends Component {
  constructor(props) {
     super(props);
     this.state = fillerData
+    this.state.styles = menuStyleData
   }
   editItem(id) {
     var editedRecipes = this.state.recipes.map(recipe => 
@@ -36,7 +39,7 @@ class App extends Component {
   }
 
   render() {
-    const { recipes } = this.state
+    const { recipes, selectedStyle, styles } = this.state
     return (
       <div className='appContainer'>
         <ViewSelect changeView={this.changeView.bind(this)}/>
@@ -49,7 +52,7 @@ class App extends Component {
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
           />)
-            case "MenuView": return <MenuView recipes={ recipes }/>
+            case "MenuView": return <MenuView recipes={ recipes } selectedStyle={selectedStyle} styles={styles}/>
           }
         })()} 
       </div>

@@ -79,3 +79,9 @@ input,textarea,button {
     margin: 10px 20px 0px 20px;
     font-weight: bold;
 }
+
+.styleSelectContainer {
+    width: 300px;
+    border: solid 1px lightgrey;
+    border-radius: 3px;
+}
