@@ -85,3 +85,9 @@ input,textarea,button {
     border: solid 1px lightgrey;
     border-radius: 3px;
 }
+
+.styleEditBox {
+    width: 250px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

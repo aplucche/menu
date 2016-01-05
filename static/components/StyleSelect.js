@@ -15,10 +15,10 @@ class StyleSelect extends Component {
           <button className='formSave' 
                   onClick={() => saveStyle(selectedStyle, ReactDOM.findDOMNode(this.refs.styleEditBox).value)}
                   >save</button>
-              <textarea name='styleEditBox' 
+              <textarea className='styleEditBox' name='styleEditBox' 
                     ref='styleEditBox' 
-                    rows='5' 
-                    defaultValue={ JSON.stringify(styles[selectedStyle]) }/>
+                    rows='9' 
+                    defaultValue={ JSON.stringify(styles[selectedStyle], null, 4) }/>
             </div>
           : <button onClick={() => toggleEditStyle() } >Edit Selected Style</button>
         }

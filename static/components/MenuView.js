@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import StyleSelect from './StyleSelect'
+import Menu from './Menu'
 
 class MenuView extends Component {
   render() {
@@ -13,13 +14,7 @@ class MenuView extends Component {
                    toggleEditStyle={toggleEditStyle}
                    saveStyle={saveStyle}
                    />
-      {recipes.map(recipe => (recipe.isSelected === true) ? 
-        <div className='menuItem' style={styles[selectedStyle]} key={recipe.id}>
-          <div className='menuItemName'>{recipe.name}</div>
-          <div className='menuItemDescription'>{recipe.description}</div>
-        </div>
-
-        : '')}
+        <Menu recipes={recipes} menuStyle={styles[selectedStyle]}/>
       </div>
       )
   }
