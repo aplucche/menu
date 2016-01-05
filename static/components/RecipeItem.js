@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import Marked from 'marked'
 
 class RecipeItem extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class RecipeItem extends Component {
           </button>
         </div>
         <div className='recipeNotes' style={expanded?{ 'display':'inline' }:{ 'display':'none' }}>
-          {recipe.notes}
+          <span dangerouslySetInnerHTML={{__html: Marked(recipe.notes, {sanitize: true, gfm: true})}} />
         </div>
       </div>
     )
