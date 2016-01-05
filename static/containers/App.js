@@ -37,9 +37,20 @@ class App extends Component {
   changeView(viewName) {
     this.setState(Object.assign({}, this.state, {'view': viewName}))
   }
+  changeSelectedStyle(style) {
+    this.setState(Object.assign({}, this.state, {'selectedStyle': style}))
+  }
+  toggleEditStyle() {
+    this.setState(Object.assign({}, this.state, {'isEditingStyle': !this.state.isEditingStyle}))
+  }
+  saveStyle(editedStyle, styleData) {
+    const updatedStyles = Object.assign({}, this.state.styles, {[editedStyle]: JSON.parse(styleData)})
+    this.setState(Object.assign({}, this.state, {styles: updatedStyles,'isEditingStyle': !this.state.isEditingStyle}))
+    console.log(this.state)
+  }
 
   render() {
-    const { recipes, selectedStyle, styles } = this.state
+    const { recipes, selectedStyle, styles, isEditingStyle } = this.state
     return (
       <div className='appContainer'>
         <ViewSelect changeView={this.changeView.bind(this)}/>
@@ -52,7 +63,14 @@ class App extends Component {
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
           />)
-            case "MenuView": return <MenuView recipes={ recipes } selectedStyle={selectedStyle} styles={styles}/>
+            case "MenuView": return <MenuView recipes={ recipes } 
+                      selectedStyle={selectedStyle} 
+                      styles={styles}
+                      changeSelectedStyle={this.changeSelectedStyle.bind(this)}
+                      isEditingStyle={isEditingStyle}
+                      toggleEditStyle={this.toggleEditStyle.bind(this)}
+                      saveStyle={this.saveStyle.bind(this)}
+                      />
           }
         })()} 
       </div>
