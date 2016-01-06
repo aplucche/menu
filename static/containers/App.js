@@ -67,6 +67,7 @@ class App extends Component {
             case "MenuView": return <MenuView recipes={ recipes } 
                       selectedStyle={selectedStyle} 
                       styles={styles}
+                      categories={ categories }
                       changeSelectedStyle={this.changeSelectedStyle.bind(this)}
                       isEditingStyle={isEditingStyle}
                       toggleEditStyle={this.toggleEditStyle.bind(this)}
