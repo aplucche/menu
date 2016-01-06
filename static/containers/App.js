@@ -46,36 +46,51 @@ class App extends Component {
   saveStyle(editedStyle, styleData) {
     const updatedStyles = Object.assign({}, this.state.styles, {[editedStyle]: JSON.parse(styleData)})
     this.setState(Object.assign({}, this.state, {styles: updatedStyles,'isEditingStyle': !this.state.isEditingStyle}))
-    console.log(this.state)
+    console.log(JSON.stringify(this.state))
   }
-
+  componentWillMount() {
+    const url = window.location.hash.substr(1)
+    if (url !== '') {
+      this.setState(Object.assign({}, this.state, {'view': 'StaticView'}))
+    }
+  }
   render() {
     const { recipes, categories, selectedStyle, styles, isEditingStyle } = this.state
+
     return (
       <div className='appContainer'>
-        <ViewSelect changeView={this.changeView.bind(this)}/>
         {(() => {
           switch (this.state.view) {
             case "RecipeView":   return (
-                    <RecipeView recipes={ recipes } 
-                      categories={ categories }
+                  <div>
+                    <ViewSelect changeView={this.changeView.bind(this)}/>
+                    <RecipeView recipes={recipes} 
+                      categories={categories}
                       editItem={this.editItem.bind(this)}
                       formCancelClick={this.formCancelClick.bind(this)}
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
-          />)
-            case "MenuView": return <MenuView recipes={ recipes } 
+                    />
+                    </div>)
+            case "MenuView": return (
+                  <div>
+                    <ViewSelect changeView={this.changeView.bind(this)}/>
+                    <MenuView recipes={recipes} 
                       selectedStyle={selectedStyle} 
                       styles={styles}
-                      categories={ categories }
+                      categories={categories}
                       changeSelectedStyle={this.changeSelectedStyle.bind(this)}
                       isEditingStyle={isEditingStyle}
                       toggleEditStyle={this.toggleEditStyle.bind(this)}
                       saveStyle={this.saveStyle.bind(this)}
-                      />
+                    />
+                    </div>)
+            case "StaticView": return (
+                    <div>{window.location.hash.substr(1)}
+                    </div>)
           }
-        })()} 
-      </div>
+        })()}
+     </div>
     )
   }
 }
