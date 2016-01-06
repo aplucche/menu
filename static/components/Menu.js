@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 class Menu extends Component {
   render() {
     const { recipes, categories, menuStyle } = this.props
-    const usedCategoriesSet = new Set(recipes.map(recipe => recipe.category))
+    const usedCategoriesSet = new Set(recipes.filter(recipe=>recipe.isSelected).map(recipe => recipe.category))
     const usedCategories = categories.filter(category => usedCategoriesSet.has(category))
 
     return (
