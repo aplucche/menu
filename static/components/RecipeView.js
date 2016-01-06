@@ -3,13 +3,27 @@ import RecipeItem from './RecipeItem'
 import RecipeForm from './RecipeForm'
 
 class RecipeView extends Component {
+  renderRecipe(recipe) {
+    const { editItem, formCancelClick, toggleSelected, formSaveClick } = this.props
+
+    if (recipe.isEditing === true) {
+      return (<RecipeForm recipe={recipe} formCancelClick={formCancelClick} formSaveClick={formSaveClick}/>)
+    } else {
+      return (<RecipeItem recipe={recipe} editItem={editItem} toggleSelected={toggleSelected}/>)
+    }
+  }
   render() {
-    const { recipes, editItem, formCancelClick, toggleSelected, formSaveClick } = this.props
+    const { recipes, categories } = this.props
+
     return (
       <div className='listContainer'>
-          {recipes.map(recipe => (recipe.isEditing === true) 
-            ? <RecipeForm key={recipe.id} recipe={recipe} formCancelClick={formCancelClick} formSaveClick={formSaveClick}/>
-            :<RecipeItem key={recipe.id} recipe={recipe} editItem={editItem} toggleSelected={toggleSelected}/>)}
+        {categories.map(category => 
+          <div key={category} className='categoryContainer'> 
+            <div className='category'>{category}</div>
+              {recipes.map(recipe =>
+                (recipe.category === category) ? <div key={recipe.id}>{this.renderRecipe(recipe)}</div> : null)}
+          </div>
+        )}
       </div>
     )
   }

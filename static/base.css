@@ -58,6 +58,14 @@ input,textarea,button {
 
 }
 
+.category {
+    font-weight: bold;
+    font-size: 120%;
+    margin-left: 15px;
+    margin-top: 15px;
+    color: steelblue;
+}
+
 .editButton {
 }
 

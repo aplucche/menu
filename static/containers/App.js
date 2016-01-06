@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import RecipeList from '../components/RecipeList'
+import RecipeView from '../components/RecipeView'
 import RecipeForm from '../components/RecipeForm'
 import ViewSelect from '../components/ViewSelect'
 import MenuView from '../components/MenuView'
@@ -50,14 +50,15 @@ class App extends Component {
   }
 
   render() {
-    const { recipes, selectedStyle, styles, isEditingStyle } = this.state
+    const { recipes, categories, selectedStyle, styles, isEditingStyle } = this.state
     return (
       <div className='appContainer'>
         <ViewSelect changeView={this.changeView.bind(this)}/>
         {(() => {
           switch (this.state.view) {
             case "RecipeView":   return (
-                    <RecipeList recipes={ recipes } 
+                    <RecipeView recipes={ recipes } 
+                      categories={ categories }
                       editItem={this.editItem.bind(this)}
                       formCancelClick={this.formCancelClick.bind(this)}
                       formSaveClick={this.formSaveClick.bind(this)}
