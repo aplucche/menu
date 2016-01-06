@@ -3,15 +3,18 @@ import RecipeView from '../components/RecipeView'
 import RecipeForm from '../components/RecipeForm'
 import ViewSelect from '../components/ViewSelect'
 import MenuView from '../components/MenuView'
+import StaticView from '../components/StaticView'
 
 import fillerData from '../dev/FillerData'
 import menuStyleData from '../dev/MenuStyleData'
+import SavedMenuData from '../dev/SavedMenuData'
 
 class App extends Component {
  constructor(props) {
     super(props);
     this.state = fillerData
     this.state.styles = menuStyleData
+    this.state.staticMenu = SavedMenuData
   }
   editItem(id) {
     var editedRecipes = this.state.recipes.map(recipe => 
@@ -46,12 +49,12 @@ class App extends Component {
   saveStyle(editedStyle, styleData) {
     const updatedStyles = Object.assign({}, this.state.styles, {[editedStyle]: JSON.parse(styleData)})
     this.setState(Object.assign({}, this.state, {styles: updatedStyles,'isEditingStyle': !this.state.isEditingStyle}))
-    console.log(JSON.stringify(this.state))
+    console.log(JSON.stringify(this.state, null, 2))
   }
   componentWillMount() {
-    const url = window.location.hash.substr(1)
-    if (url !== '') {
-      this.setState(Object.assign({}, this.state, {'view': 'StaticView'}))
+    const urlHash = window.location.hash.substr(1)
+    if (urlHash !== '') {
+      this.setState(Object.assign({}, this.state, {'view': 'StaticView'}, this.state.staticMenu[urlHash]))
     }
   }
   render() {
@@ -86,8 +89,11 @@ class App extends Component {
                     />
                     </div>)
             case "StaticView": return (
-                    <div>{window.location.hash.substr(1)}
-                    </div>)
+                    <StaticView recipes={recipes} 
+                      selectedStyle={selectedStyle} 
+                      styles={styles}
+                      categories={categories}
+                    />)
           }
         })()}
      </div>
