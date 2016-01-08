@@ -1,4 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+
+import * as RecipeActions from '../actions/recipes'
+
 import RecipeView from '../components/RecipeView'
 import RecipeForm from '../components/RecipeForm'
 import ViewSelect from '../components/ViewSelect'
@@ -12,15 +17,16 @@ import SavedMenuData from '../dev/SavedMenuData'
 class App extends Component {
  constructor(props) {
     super(props);
-    this.state = fillerData
+    this.state = Object.assign({}, this.state, fillerData)
+    //this.state = fillerData
     this.state.styles = menuStyleData
     this.state.staticMenu = SavedMenuData
   }
-  editItem(id) {
-    var editedRecipes = this.state.recipes.map(recipe => 
-            (recipe.id===id) ? Object.assign({}, recipe, {'isEditing':true}) : recipe)
-    this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
-  }
+  //editItem(id) {
+  //  var editedRecipes = this.state.recipes.map(recipe => 
+  //          (recipe.id===id) ? Object.assign({}, recipe, {'isEditing':true}) : recipe)
+  //  this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
+  //}
   formCancelClick(id) {
     var editedRecipes = this.state.recipes.map(recipe => 
             (recipe.id===id) ? Object.assign({}, recipe, {'isEditing':false}) : recipe)
@@ -58,7 +64,7 @@ class App extends Component {
     }
   }
   render() {
-    const { recipes, categories, selectedStyle, styles, isEditingStyle } = this.state
+    const { actions, recipes, categories, selectedStyle, styles, isEditingStyle } = this.state
 
     return (
       <div className='appContainer'>
@@ -69,7 +75,7 @@ class App extends Component {
                     <ViewSelect changeView={this.changeView.bind(this)}/>
                     <RecipeView recipes={recipes} 
                       categories={categories}
-                      editItem={this.editItem.bind(this)}
+                      editItem={actions.editItem}
                       formCancelClick={this.formCancelClick.bind(this)}
                       formSaveClick={this.formSaveClick.bind(this)}
                       toggleSelected={this.toggleSelected.bind(this)}
@@ -101,4 +107,19 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps(state) {
+  return {
+    recipes: state.recipes
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(RecipeActions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+  )(App)
