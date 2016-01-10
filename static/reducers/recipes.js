@@ -1,5 +1,4 @@
 import { EDIT_ITEM, FORM_SAVE_CLICK, FORM_CANCEL_CLICK, TOGGLE_SELECTED } from '../actions'
-import fillerData from '../dev/FillerData'
 
 const initialState = [
               {

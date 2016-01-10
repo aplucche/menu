@@ -58,51 +58,44 @@ class App extends Component {
     this.setState(Object.assign({}, this.state, {styles: updatedStyles,'isEditingStyle': !this.state.isEditingStyle}))
     console.log(JSON.stringify(this.state, null, 2))
   }
+
   componentWillMount() {
     const urlHash = window.location.hash.substr(1)
     if (urlHash !== '') {
       this.setState(Object.assign({}, this.state, {'view': 'StaticView'}, this.state.staticMenu[urlHash]))
     }
   }
-  */
+*/
   render() {
-    const { actions, recipes, categories, selectedStyle, styles, isEditingStyle } = this.props
+    const { actions, recipes, categories, selectedStyle, styles, isEditingStyle, view} = this.props
+    console.log(this.props)
 
     return (
       <div className='appContainer'>
-      <div>Something is here</div>
-        <RecipeView recipes={recipes} 
-                      categories={['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Cocktails']}
+        {(() => {
+          switch (view) {
+            case "RecipeView": return (
+                  <div>
+                    <ViewSelect changeView={actions.changeView}/>
+                    <RecipeView recipes={recipes} 
+                      categories={categories}
                       editItem={actions.editItem}
                       formCancelClick={actions.formCancelClick}
                       formSaveClick={actions.formSaveClick}
                       toggleSelected={actions.toggleSelected}
-        />
-
-        {/*(() => {
-          switch (this.state.view) {
-            case "RecipeView":   return (
-                  <div>
-                    <ViewSelect changeView={this.changeView.bind(this)}/>
-                    <RecipeView recipes={recipes} 
-                      categories={categories}
-                      editItem={actions.editItem}
-                      formCancelClick={this.formCancelClick.bind(this)}
-                      formSaveClick={this.formSaveClick.bind(this)}
-                      toggleSelected={this.toggleSelected.bind(this)}
                     />
                     </div>)
             case "MenuView": return (
                   <div>
-                    <ViewSelect changeView={this.changeView.bind(this)}/>
+                    <ViewSelect changeView={actions.changeView}/>
                     <MenuView recipes={recipes} 
                       selectedStyle={selectedStyle} 
                       styles={styles}
                       categories={categories}
-                      changeSelectedStyle={this.changeSelectedStyle.bind(this)}
                       isEditingStyle={isEditingStyle}
-                      toggleEditStyle={this.toggleEditStyle.bind(this)}
-                      saveStyle={this.saveStyle.bind(this)}
+                      changeSelectedStyle={actions.changeSelectedStyle}
+                      toggleEditStyle={actions.toggleEditStyle}
+                      saveStyle={actions.saveStyle}
                     />
                     </div>)
             case "StaticView": return (
@@ -112,7 +105,7 @@ class App extends Component {
                       categories={categories}
                     />)
           }
-        })()*/}
+        })()}
      </div>
     )
   }
@@ -120,13 +113,13 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    view: state.view,
+    view: state.application.view,
+    categories: state.application.categories,
     recipes: state.recipes,
-    categories: state.categories,
-    selectedStyle: state.selectedStyle,
-    styles: state.styles,
-    isEditingStyle: state.isEditingStyle,
-    staticMenu: state.staticMenu
+    selectedStyle: state.styles.selectedStyle,
+    styles: state.styles.styles,
+    isEditingStyle: state.styles.isEditingStyle,
+    staticMenu: state.application.staticMenu
   }
 }
 

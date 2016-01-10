@@ -74,7 +74,7 @@ export default function styles(state=initialState, action) {
     case TOGGLE_EDIT_STYLE:
       return Object.assign({}, state, {'isEditingStyle': !state.isEditingStyle})
     case SAVE_STYLE:
-      const updatedStyles = Object.assign({}, state.styles, {[style]: JSON.parse(styleData)})
+      const updatedStyles = Object.assign({}, state.styles, {[action.style]: JSON.parse(action.styleData)})
       return Object.assign({}, state, {styles: updatedStyles,'isEditingStyle': !state.isEditingStyle})
     default:
       return state
