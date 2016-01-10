@@ -1,9 +1,13 @@
 import { CHANGE_VIEW } from '../actions'
+import SavedMenuData from '../dev/SavedMenuData'
+
+
+const savedMenuData = SavedMenuData
 
 const initialState = {
   view: 'RecipeView',
   categories: ['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Cocktails'],
-  staticMenu: {}
+  staticMenu: savedMenuData
 }
 
 export default function application(state=initialState, action) {

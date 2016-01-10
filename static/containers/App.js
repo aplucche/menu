@@ -58,17 +58,16 @@ class App extends Component {
     this.setState(Object.assign({}, this.state, {styles: updatedStyles,'isEditingStyle': !this.state.isEditingStyle}))
     console.log(JSON.stringify(this.state, null, 2))
   }
-
+*/
   componentWillMount() {
     const urlHash = window.location.hash.substr(1)
     if (urlHash !== '') {
-      this.setState(Object.assign({}, this.state, {'view': 'StaticView'}, this.state.staticMenu[urlHash]))
+      this.setState(Object.assign({}, this.state, {'view': 'StaticView'}, SavedMenuData[urlHash]))
     }
   }
-*/
+
   render() {
     const { actions, recipes, categories, selectedStyle, styles, isEditingStyle, view} = this.props
-    console.log(this.props)
 
     return (
       <div className='appContainer'>
