@@ -22,11 +22,16 @@ class App extends Component {
     this.state.styles = menuStyleData
     this.state.staticMenu = SavedMenuData
   }
+  //componentDidMount() {
+  //  this.setState(Object.assign({},this.state, fillerData, {styles: menuStyleData}, {staticMenu: SavedMenuData}))
+  //
+  // }
   //editItem(id) {
   //  var editedRecipes = this.state.recipes.map(recipe => 
   //          (recipe.id===id) ? Object.assign({}, recipe, {'isEditing':true}) : recipe)
   //  this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
   //}
+  /*
   formCancelClick(id) {
     var editedRecipes = this.state.recipes.map(recipe => 
             (recipe.id===id) ? Object.assign({}, recipe, {'isEditing':false}) : recipe)
@@ -43,6 +48,8 @@ class App extends Component {
             (recipe.id===id) ? Object.assign({}, recipe, updatedRecipe) : recipe)
     this.setState(Object.assign({}, this.state, {'recipes': editedRecipes}))
   }
+  */
+  /*
   changeView(viewName) {
     this.setState(Object.assign({}, this.state, {'view': viewName}))
   }
@@ -63,12 +70,22 @@ class App extends Component {
       this.setState(Object.assign({}, this.state, {'view': 'StaticView'}, this.state.staticMenu[urlHash]))
     }
   }
+  */
   render() {
-    const { actions, recipes, categories, selectedStyle, styles, isEditingStyle } = this.state
+    const { actions, recipes, categories, selectedStyle, styles, isEditingStyle } = this.props
 
     return (
       <div className='appContainer'>
-        {(() => {
+      <div>Something is here</div>
+        <RecipeView recipes={recipes} 
+                      categories={['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Cocktails']}
+                      editItem={actions.editItem}
+                      formCancelClick={actions.formCancelClick}
+                      formSaveClick={actions.formSaveClick}
+                      toggleSelected={actions.toggleSelected}
+        />
+
+        {/*(() => {
           switch (this.state.view) {
             case "RecipeView":   return (
                   <div>
@@ -101,7 +118,7 @@ class App extends Component {
                       categories={categories}
                     />)
           }
-        })()}
+        })()*/}
      </div>
     )
   }
@@ -109,7 +126,11 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    recipes: state.recipes
+    recipes: state.recipes,
+    categories: state.categories,
+    selectedStyle: state.selectedStyle,
+    styles: state.styles,
+    isEditingStyle: state.isEditingStyle
   }
 }
 
