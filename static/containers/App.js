@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import * as RecipeActions from '../actions/recipes'
+import * as Actions from '../actions'
 
 import RecipeView from '../components/RecipeView'
 import RecipeForm from '../components/RecipeForm'
@@ -15,13 +15,7 @@ import menuStyleData from '../dev/MenuStyleData'
 import SavedMenuData from '../dev/SavedMenuData'
 
 class App extends Component {
- constructor(props) {
-    super(props);
-    this.state = Object.assign({}, this.state, fillerData)
-    //this.state = fillerData
-    this.state.styles = menuStyleData
-    this.state.staticMenu = SavedMenuData
-  }
+
   //componentDidMount() {
   //  this.setState(Object.assign({},this.state, fillerData, {styles: menuStyleData}, {staticMenu: SavedMenuData}))
   //
@@ -126,17 +120,19 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
+    view: state.view,
     recipes: state.recipes,
     categories: state.categories,
     selectedStyle: state.selectedStyle,
     styles: state.styles,
-    isEditingStyle: state.isEditingStyle
+    isEditingStyle: state.isEditingStyle,
+    staticMenu: state.staticMenu
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(RecipeActions, dispatch)
+    actions: bindActionCreators(Actions, dispatch)
   }
 }
 
