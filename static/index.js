@@ -7,7 +7,7 @@ import { applyMiddleware, createStore } from 'redux'
 import rootReducer from './reducers'
 import createLogger from 'redux-logger'
 
-const logger = createLogger()
+const logger = createLogger({ collapsed: true })
 const createStoreWithMiddleware = applyMiddleware(logger)(createStore)
 let store = createStoreWithMiddleware(rootReducer)
 let rootElement = document.getElementById('root')
