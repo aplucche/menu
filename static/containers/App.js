@@ -26,6 +26,7 @@ class App extends Component {
                       formCancelClick={actions.formCancelClick}
                       formSaveClick={actions.formSaveClick}
                       toggleSelected={actions.toggleSelected}
+                      actions={actions}
                     />
                     </div>)
             case "MenuView": return (

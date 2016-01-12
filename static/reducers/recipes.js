@@ -1,4 +1,4 @@
-import { EDIT_ITEM, FORM_SAVE_CLICK, FORM_CANCEL_CLICK, TOGGLE_SELECTED } from '../actions'
+import { EDIT_ITEM, FORM_SAVE_CLICK, FORM_CANCEL_CLICK, TOGGLE_SELECTED, ADD_RECIPE } from '../actions'
 
 const initialState = [
               {
@@ -121,6 +121,20 @@ export default function recipes(state=initialState, action) {
       return state.map(recipe =>
         (recipe.id===action.id) ? Object.assign({}, recipe, {'isSelected':!recipe.isSelected}) : recipe
       )
+    case ADD_RECIPE:
+      return [
+        ...state,
+        {
+          id: state.reduce((maxId, recipe) => Math.max(recipe.id, maxId), -1) + 1,
+          name : action.recipe.name,
+          description: action.recipe.description,
+          link : action.recipe.link,
+          category : action.recipe.category,
+          notes : action.recipe.notes,
+          isSelected : false,
+          isEditing : false
+        } 
+      ]
     default:
       return state
   }

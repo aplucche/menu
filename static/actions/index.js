@@ -3,7 +3,9 @@ export const EDIT_ITEM = 'EDIT_ITEM'
 export const FORM_CANCEL_CLICK = 'FORM_CANCEL_CLICK'
 export const FORM_SAVE_CLICK = 'FORM_SAVE_CLICK'
 export const TOGGLE_SELECTED = 'TOGGLE_SELECTED'
+export const ADD_RECIPE = 'ADD_RECIPE'
 
+//recipe actions
 export function editItem(id) {
   return { type: EDIT_ITEM, id }
 }
@@ -18,6 +20,9 @@ export function formSaveClick(id, updatedRecipe) {
 
 export function toggleSelected(id) {
   return { type: TOGGLE_SELECTED, id }
+}
+export function addRecipe(recipe) {
+  return { type: ADD_RECIPE, recipe }
 }
 
 
