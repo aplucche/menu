@@ -1,5 +1,20 @@
 #Menu Documentation
 ___
+##Component Structure
+
+***App***
+- **ViewSelect**
+- **RecipeView**
+..  - AddRecipe
+..  - RecipeItem
+..  - RecipeForm
+- **MenuView**
+..  - StyleSelect
+..  - Menu
+- **StaticView**
+..  - Menu
+
+___
 ##API
 ###Recipes
 **Table**
@@ -23,3 +38,5 @@ ___
 |POST   |/recipe        |            |
 |PUT    |/recipe/\{id\} |            |
 |DELETE |/recipe/\{id\} |            |
+
+___

@@ -8,7 +8,10 @@ import { EDIT_ITEM,
          RECIPES_FETCH_ERROR,
          RECIPE_CREATE_START,
          RECIPE_CREATE_SUCCESS,
-         RECIPE_CREATE_ERROR } from '../actions'
+         RECIPE_CREATE_ERROR,
+         RECIPE_UPDATE_START,
+         RECIPE_UPDATE_SUCCESS,
+         RECIPE_UPDATE_ERROR } from '../actions'
 
 const initialState = [{
                 "id" : 0,
@@ -43,6 +46,10 @@ export default function recipes(state=initialState, action) {
         } 
       ]
     case RECIPE_CREATE_SUCCESS:
+      return state
+    case RECIPE_UPDATE_START:
+      return state
+    case RECIPE_UPDATE_SUCCESS:
       return state
     case EDIT_ITEM:
       return state.map(recipe =>

@@ -15,14 +15,46 @@ export const RECIPE_CREATE_START = 'RECIPE_CREATE_START'
 export const RECIPE_CREATE_SUCCESS = 'RECIPE_CREATE_SUCCESS'
 export const RECIPE_CREATE_ERROR = 'RECIPE_CREATE_ERROR'
 
+export const RECIPE_UPDATE_START = 'RECIPE_UPDATE_START'
+export const RECIPE_UPDATE_SUCCESS = 'RECIPE_UPDATE_SUCCESS'
+export const RECIPE_UPDATE_ERROR = 'RECIPE_UPDATE_ERROR'
+
 //api actions
 const jsonHeaders = new Headers();
 jsonHeaders.append("Content-Type", 'application/json');
 
+export function recipeUpdate(userId, id, recipe) {
+  return dispatch => {
+  dispatch(recipeUpdateStart(id, recipe))
+    return fetch(`../api/v1/recipes/${id}`, {
+        method: 'PUT',
+        headers: jsonHeaders,
+        body: JSON.stringify(recipe)
+      })
+      .then(response => dispatch(recipesFetch(userId)))
+      .catch(err => console.error(err))
+  }
+}
+export function recipeUpdateStart(id, recipe) {
+  return {type: RECIPE_UPDATE_START, id, recipe}
+}
+
+export function recipeUpdateSuccess(response) {
+  return {
+    type: RECIPE_UPDATE_SUCCESS, 
+    data: JSON.stringify(response)
+  }
+}
+
+export function recipeUpdateError(id) {
+  return {type: RECIPES_UPDATE_ERROR, id}
+}
+
+
 export function recipeCreate(recipe, userId) {
   return dispatch => {
     //optimistically add to state
-    dispatch(recipeCreateStart())
+    dispatch(recipeCreateStart(recipe))
     return fetch('../api/v1/recipes', {
         method: 'POST',
         headers: jsonHeaders,

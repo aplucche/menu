@@ -3,17 +3,18 @@ import ReactDOM from 'react-dom'
 
 class RecipeForm extends Component {
   render() {
-    const { recipe, formCancelClick, formSaveClick, categories } = this.props
+    const { actions, recipe, formCancelClick, formSaveClick, categories } = this.props
     return (
       <div className='formContainer'>
         <div className='formButtonRow'>
-          <button className='formSave' onClick={() => formSaveClick(recipe.id, 
+          <button className='formSave' onClick={() => actions.recipeUpdate(1, recipe.id, 
               {
                 'name': ReactDOM.findDOMNode(this.refs.recipeName).value,
                 'description': ReactDOM.findDOMNode(this.refs.recipeDescription).value,
                 'link': ReactDOM.findDOMNode(this.refs.recipeLink).value,
                 'notes': ReactDOM.findDOMNode(this.refs.recipeNotes).value,
-                'category': ReactDOM.findDOMNode(this.refs.recipeCategory).value
+                'category': ReactDOM.findDOMNode(this.refs.recipeCategory).value,
+                'userid' : 1
               }  
             )}>save</button>
           <button className='formCancel' onClick={() => formCancelClick(recipe.id) }>cancel</button>

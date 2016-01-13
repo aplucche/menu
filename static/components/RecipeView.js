@@ -5,10 +5,10 @@ import AddRecipe from './AddRecipe'
 
 class RecipeView extends Component {
   renderRecipe(recipe) {
-    const { categories, editItem, formCancelClick, toggleSelected, formSaveClick } = this.props
+    const { actions, categories, editItem, formCancelClick, toggleSelected, formSaveClick } = this.props
 
     if (recipe.isEditing === true) {
-      return (<RecipeForm recipe={recipe} categories={categories} formCancelClick={formCancelClick} formSaveClick={formSaveClick}/>)
+      return (<RecipeForm recipe={recipe} categories={categories} actions={ actions} formCancelClick={formCancelClick} formSaveClick={formSaveClick}/>)
     } else {
       return (<RecipeItem recipe={recipe} editItem={editItem} toggleSelected={toggleSelected}/>)
     }
