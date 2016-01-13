@@ -20,15 +20,15 @@ const jsonHeaders = new Headers();
 jsonHeaders.append("Content-Type", 'application/json');
 
 export function recipeCreate(recipe, userId) {
-
   return dispatch => {
+    //optimistically add to state
     dispatch(recipeCreateStart())
     return fetch('../api/v1/recipes', {
         method: 'POST',
         headers: jsonHeaders,
         body: JSON.stringify(recipe)
       })
-      .then(dispatch(recipesFetch(userId)))
+      .then(response => dispatch(recipesFetch(userId)))
       .catch(err => console.error(err))
   }
 }
@@ -40,7 +40,6 @@ export function recipeCreateStart(recipe) {
 export function recipeCreateSuccess(response) {
   return {
     type: RECIPE_CREATE_SUCCESS, 
-    id,
     data: JSON.stringify(response)
   }
 }
