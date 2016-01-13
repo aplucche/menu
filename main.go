@@ -1,9 +1,167 @@
 package main
 
 import (
-	"fmt"
+	"database/sql"
+	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
+	"gopkg.in/gorp.v1"
+	"log"
+	"net/http"
+	"strconv"
 )
 
+type Recipe struct {
+	Id          int64  `db:"id" json:"id"`
+	UserId      int64  `db:"userId" json:"userId"`
+	Name        string `db:"name" json:"name"`
+	Description string `db:"description" json:"description"`
+	Link        string `db:"link" json:"link"`
+	Category    string `db:"category" json:"category"`
+	Notes       string `db:"notes" json:"notes"`
+}
+
+var dbmap = initDb()
+
+func initDb() *gorp.DbMap {
+	db, err := sql.Open("postgres", "user=golang password=password dbname=golang host=localhost sslmode=disable")
+	checkErr(err, "sql.Open failed")
+	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
+	dbmap.AddTableWithName(Recipe{}, "Recipe").SetKeys(true, "Id")
+	err = dbmap.CreateTablesIfNotExists()
+	checkErr(err, "Create table failed")
+
+	return dbmap
+}
+
+func checkErr(err error, msg string) {
+	if err != nil {
+		log.Fatalln(msg, err)
+	}
+}
+
 func main() {
-	fmt.Printf("Hello")
+	r := gin.Default()
+	r.StaticFS("/static", http.Dir("static"))
+	v1 := r.Group("api/v1")
+	{
+		v1.GET("/recipes", GetRecipes)
+		v1.GET("/recipes/:id", GetRecipe)
+		v1.POST("/recipes", PostRecipe)
+		v1.PUT("/recipes/:id", UpdateRecipe)
+		v1.DELETE("/recipes/:id", DeleteRecipe)
+	}
+	r.Run(":8080")
+}
+
+func GetRecipes(c *gin.Context) {
+	var recipes []Recipe
+	_, err := dbmap.Select(&recipes, "select * from recipe")
+
+	if err == nil {
+		c.JSON(200, recipes)
+	} else {
+		c.JSON(404, gin.H{"error": "no items in this table"})
+	}
+}
+
+func GetRecipe(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var recipe Recipe
+	err := dbmap.SelectOne(&recipe, "select * from recipe where id=$1", id)
+
+	if err == nil {
+		recipe_id, _ := strconv.ParseInt(id, 0, 64)
+
+		content := &Recipe{
+			Id:          recipe_id,
+			Name:        recipe.Name,
+			Description: recipe.Description,
+			Link:        recipe.Link,
+			Category:    recipe.Category,
+			Notes:       recipe.Notes,
+		}
+		c.JSON(200, content)
+	} else {
+		c.JSON(404, gin.H{"error": "item not found"})
+	}
+}
+
+func PostRecipe(c *gin.Context) {
+	var recipe Recipe
+	c.Bind(&recipe)
+
+	if recipe.Name != "" {
+		if insert, _ := dbmap.Exec(`insert into recipe (userid, name, description, link, category, notes) values ($1, $2, $3, $4, $5, $6)`,
+			recipe.UserId, recipe.Name, recipe.Description, recipe.Link, recipe.Category, recipe.Notes); insert != nil {
+
+			content := &Recipe{
+				Id:          0,
+				UserId:      recipe.UserId,
+				Name:        recipe.Name,
+				Description: recipe.Description,
+				Link:        recipe.Link,
+				Category:    recipe.Category,
+				Notes:       recipe.Notes,
+			}
+			c.JSON(201, content)
+		}
+	} else {
+		c.JSON(422, gin.H{"error": "fields are empty"})
+	}
+}
+
+func UpdateRecipe(c *gin.Context) {
+	id := c.Params.ByName("id")
+	var recipe Recipe
+	err := dbmap.SelectOne(&recipe, "select * from recipe where id =$1", id)
+
+	if err == nil {
+		var json Recipe
+		c.Bind(&json)
+
+		recipe_id, _ := strconv.ParseInt(id, 0, 64)
+
+		recipe := Recipe{
+			Id:          recipe_id,
+			UserId:      json.UserId,
+			Name:        json.Name,
+			Description: json.Description,
+			Link:        json.Link,
+			Category:    json.Category,
+			Notes:       json.Notes,
+		}
+
+		if recipe.Name != "" {
+			_, err := dbmap.Update(&recipe)
+
+			if err == nil {
+				c.JSON(200, recipe)
+			} else {
+				checkErr(err, "Updated failed")
+			}
+
+		} else {
+			c.JSON(422, gin.H{"error": "fields are empty"})
+		}
+	} else {
+		c.JSON(404, gin.H{"error": "item not found"})
+	}
+}
+
+func DeleteRecipe(c *gin.Context) {
+	id := c.Params.ByName("id")
+
+	var recipe Recipe
+	err := dbmap.SelectOne(&recipe, "select id from recipe where id=$1", id)
+
+	if err == nil {
+		_, err = dbmap.Delete(&recipe)
+		if err == nil {
+			c.JSON(200, gin.H{"id #" + id: "deleted"})
+		} else {
+			checkErr(err, "Delete failed")
+		}
+	} else {
+		c.JSON(404, gin.H{"error": "item not found"})
+	}
 }
