@@ -5,7 +5,10 @@ import { EDIT_ITEM,
          ADD_RECIPE, 
          RECIPES_FETCH_START,
          RECIPES_FETCH_SUCCESS,
-         RECIPES_FETCH_ERROR } from '../actions'
+         RECIPES_FETCH_ERROR,
+         RECIPE_CREATE_START,
+         RECIPE_CREATE_SUCCESS,
+         RECIPE_CREATE_ERROR } from '../actions'
 
 const initialState = [{
                 "id" : 0,
@@ -25,6 +28,22 @@ export default function recipes(state=initialState, action) {
     case RECIPES_FETCH_SUCCESS:
       const loadedRecipes = action.data.map(recipe=>Object.assign({},recipe, {isSelected:false, isEditing:false}))
       return loadedRecipes
+    case RECIPE_CREATE_START:
+      return [
+        ...state,
+        {
+          id: state.reduce((maxId, recipe) => Math.max(recipe.id, maxId), -1) + 1,
+          name : action.recipe.name,
+          description: action.recipe.description,
+          link : action.recipe.link,
+          category : action.recipe.category,
+          notes : action.recipe.notes,
+          isSelected : false,
+          isEditing : false
+        } 
+      ]
+    case RECIPE_CREATE_SUCCESS:
+      return state
     case EDIT_ITEM:
       return state.map(recipe =>
         (recipe.id===action.id) ? Object.assign({}, recipe, {'isEditing':true}) : recipe

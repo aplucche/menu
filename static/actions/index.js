@@ -11,7 +11,46 @@ export const RECIPES_FETCH_START = 'RECIPES_FETCH_START'
 export const RECIPES_FETCH_SUCCESS = 'RECIPES_FETCH_SUCCESS'
 export const RECIPES_FETCH_ERROR = 'RECIPES_FETCH_ERROR'
 
+export const RECIPE_CREATE_START = 'RECIPE_CREATE_START'
+export const RECIPE_CREATE_SUCCESS = 'RECIPE_CREATE_SUCCESS'
+export const RECIPE_CREATE_ERROR = 'RECIPE_CREATE_ERROR'
+
 //api actions
+const jsonHeaders = new Headers();
+jsonHeaders.append("Content-Type", 'application/json');
+
+export function recipeCreate(recipe, userId) {
+
+  return dispatch => {
+    dispatch(recipeCreateStart())
+    return fetch('../api/v1/recipes', {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify(recipe)
+      })
+      .then(dispatch(recipesFetch(userId)))
+      .catch(err => console.error(err))
+  }
+}
+
+export function recipeCreateStart(recipe) {
+  return {type: RECIPE_CREATE_START, recipe}
+}
+
+export function recipeCreateSuccess(response) {
+  return {
+    type: RECIPE_CREATE_SUCCESS, 
+    id,
+    data: JSON.stringify(response)
+  }
+}
+
+export function recipeCreateError(id) {
+  return {type: RECIPES_CREATE_ERROR, id}
+}
+
+
+
 export function recipesFetchStart(userId) {
   return {type: RECIPES_FETCH_START, userId}
 }
@@ -26,7 +65,6 @@ export function recipesFetch(userId) {
 }
 
 export function recipesFetchSuccess(userId, json) {
-  console.log(json)
   return {
     type: RECIPES_FETCH_SUCCESS, 
     userId,

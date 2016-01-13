@@ -14,15 +14,16 @@ class AddRecipe extends Component {
         {(this.state.expanded===true) ? 
         <div className='formContainer'>
           <div className='formButtonRow'>
-            <button className='formSave' onClick={()=> actions.addRecipe(
+            <button className='formSave' onClick={()=> actions.recipeCreate(
                 {
                   'name': ReactDOM.findDOMNode(this.refs.addRecipeName).value,
                   'description': ReactDOM.findDOMNode(this.refs.addRecipeDescription).value,
                   'link': ReactDOM.findDOMNode(this.refs.addRecipeLink).value,
                   'notes': ReactDOM.findDOMNode(this.refs.addRecipeNotes).value,
                   'category': ReactDOM.findDOMNode(this.refs.addRecipeCategory).value,
+                  'userid' : 1
                 }  
-              , this.setState({expanded: false}))}>save</button>
+              , 1 ,this.setState({expanded: false}))}>save</button>
             <button className='collapseAddRecipeForm' onClick={()=>this.setState({expanded: false})}>cancel</button>
           </div>
           <label forHtml='recipeName'>Name:</label>
