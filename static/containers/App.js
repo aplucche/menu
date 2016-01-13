@@ -11,6 +11,13 @@ import MenuView from '../components/MenuView'
 import StaticView from '../components/StaticView'
 
 class App extends Component {
+  componentDidMount() {
+    const { actions } = this.props
+    console.log(this.props)
+    //(() => actions.fetchRecipes(1))
+    //actions.fetchRecipes(1).catch(function() { /* prevents "Uncaught (in promise) error */})
+    actions.recipesFetch(1)
+  }
   render() {
     const { view, actions, recipes, categories, selectedStyle, styles, isEditingStyle, staticMenu } = this.props
     return (
