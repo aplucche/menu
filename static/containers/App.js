@@ -44,6 +44,7 @@ class App extends Component {
                       changeSelectedStyle={actions.changeSelectedStyle}
                       toggleEditStyle={actions.toggleEditStyle}
                       saveStyle={actions.saveStyle}
+                      actions={actions}
                     />
                     </div>)
             case "StaticView": return (

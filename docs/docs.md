@@ -10,6 +10,7 @@ ___
 ..  - RecipeForm
 - **MenuView**
 ..  - StyleSelect
+..  - MenuSelect
 ..  - Menu
 - **StaticView**
 ..  - Menu

@@ -1,4 +1,4 @@
-import { CHANGE_VIEW } from '../actions'
+import { CHANGE_VIEW, MENU_CREATE_START, MENU_CREATE_SUCCESS, MENU_CREATE_ERROR } from '../actions'
 import SavedMenuData from '../dev/SavedMenuData'
 
 
@@ -14,6 +14,10 @@ export default function application(state=initialState, action) {
   switch(action.type) {
     case CHANGE_VIEW:
       return Object.assign({}, state, {'view': action.viewName})
+    case MENU_CREATE_START:
+      return state
+    case MENU_CREATE_SUCCESS:
+      return state
     default:
       return state
   }

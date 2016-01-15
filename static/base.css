@@ -122,3 +122,14 @@ input,textarea,button {
     flex-flow: column nowrap;
 
 }
+
+.menuSaveContainer {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.saveMenuForm {
+    display: flex;
+    flex-flow: row nowrap;
+
+}

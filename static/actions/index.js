@@ -19,9 +19,30 @@ export const RECIPE_UPDATE_START = 'RECIPE_UPDATE_START'
 export const RECIPE_UPDATE_SUCCESS = 'RECIPE_UPDATE_SUCCESS'
 export const RECIPE_UPDATE_ERROR = 'RECIPE_UPDATE_ERROR'
 
+export const MENU_CREATE_START = 'MENU_CREATE_START'
+export const MENU_CREATE_SUCCESS = 'MENU_CREATE_SUCCESS'
+export const MENU_CREATE_ERROR = 'MENU_CREATE_ERROR'
+
+
 //api actions
 const jsonHeaders = new Headers();
 jsonHeaders.append("Content-Type", 'application/json');
+
+export function menuCreate(data, menuName) {
+  return dispatch => {
+    return fetch('../api/v1/menus', {
+        method: 'POST',
+        headers: jsonHeaders,
+        body: JSON.stringify(Object.assign({},{data: data},{name:menuName}))
+      })
+      .then(response => response)
+      .catch(err => console.error(err))
+  }
+}
+
+export function menuCreateStart(menu) { return { type: MENU_CREATE_START, menu} }
+export function menuCreateSuccess(response) { return { type: MENU_CREATE_SUCCESS, data: JSON.stringify(response) }}
+export function menuCreateError(id) { return { type: MENU_CREATE_ERROR, id} }
 
 export function recipeUpdate(userId, id, recipe) {
   return dispatch => {
