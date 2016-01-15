@@ -14,6 +14,7 @@ class MenuView extends Component {
                    toggleEditStyle={toggleEditStyle}
                    saveStyle={saveStyle}
                    />
+      <MenuSelect />
         <Menu recipes={recipes} categories={categories} menuStyle={styles[selectedStyle]}/>
       </div>
       )

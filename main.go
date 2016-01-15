@@ -20,6 +20,12 @@ type Recipe struct {
 	Notes       string `db:"notes" json:"notes"`
 }
 
+type Menu struct {
+	Id   int64  `db:"id" json:"id"`
+	Name string `db:"name" json:"name"`
+	Data string `db:"data" json:"data"`
+}
+
 var dbmap = initDb()
 
 func initDb() *gorp.DbMap {
@@ -27,6 +33,7 @@ func initDb() *gorp.DbMap {
 	checkErr(err, "sql.Open failed")
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
 	dbmap.AddTableWithName(Recipe{}, "Recipe").SetKeys(true, "Id")
+	dbmap.AddTableWithName(Menu{}, "Menu").SetKeys(true, "Id")
 	err = dbmap.CreateTablesIfNotExists()
 	checkErr(err, "Create table failed")
 
@@ -49,8 +56,43 @@ func main() {
 		v1.POST("/recipes", PostRecipe)
 		v1.PUT("/recipes/:id", UpdateRecipe)
 		v1.DELETE("/recipes/:id", DeleteRecipe)
+
+		v1.GET("/menus", GetMenus)
+		v1.POST("/menus", PostMenu)
+
 	}
 	r.Run(":8080")
+}
+
+func GetMenus(c *gin.Context) {
+	var menus []Menu
+	_, err := dbmap.Select(&menus, "select * from menus")
+
+	if err == nil {
+		c.JSON(200, menus)
+	} else {
+		c.JSON(404, gin.H{"error": "no items in this table"})
+	}
+}
+
+func PostMenu(c *gin.Context) {
+	var menu Menu
+	c.Bind(&menu)
+
+	if menu.Name != "" {
+		if insert, _ := dbmap.Exec(`insert into menu (name, data) values ($1, $2)`,
+			menu.Name, menu.Data); insert != nil {
+
+			content := &Menu{
+				Id:   0,
+				Name: menu.Name,
+				Data: menu.Data,
+			}
+			c.JSON(201, content)
+		}
+	} else {
+		c.JSON(422, gin.H{"error": "fields are empty"})
+	}
 }
 
 func GetRecipes(c *gin.Context) {
