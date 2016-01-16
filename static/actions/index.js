@@ -46,8 +46,6 @@ export function menuCreateStart(menu) { return { type: MENU_CREATE_START, menu} 
 export function menuCreateSuccess(response) { return { type: MENU_CREATE_SUCCESS, data: JSON.stringify(response) }}
 export function menuCreateError(id) { return { type: MENU_CREATE_ERROR, id} }
 
-
-
 export function menusFetch() {
   return dispatch => {
     dispatch(menusFetchStart())
@@ -61,14 +59,9 @@ export function menusFetchStart() { return {type: MENUS_FETCH_START } }
 export function menusFetchError() { return {type: MENUS_FETCH_ERROR} }
 
 export function menusFetchSuccess(json) {
-  //return as object with menu names as keys
-  const menuObject = {}
-  for (let menu of json) {
-    menuObject[menu.name] = JSON.parse(menu.data)
-  } 
   return {
     type: MENUS_FETCH_SUCCESS, 
-    data: menuObject
+    data: json
   }
 }
 
@@ -198,7 +191,12 @@ export function saveStyle (style, styleData) {
 
 //application
 export const CHANGE_VIEW = 'CHANGE_VIEW'
+export const MENUVIEW_TOGGLE_EXPANDED = 'MENUVIEW_TOGGLE_EXPANDED'
 
 export function changeView(viewName) {
   return {type: CHANGE_VIEW, viewName}
+}
+
+export function menuViewToggleExpanded(menuViewItem, option) {
+  return {type: MENUVIEW_TOGGLE_EXPANDED, menuViewItem, option}
 }

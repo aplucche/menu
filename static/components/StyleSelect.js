@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom'
 
 class StyleSelect extends Component {
   render() {
-    const { selectedStyle, styles, changeSelectedStyle, isEditingStyle, toggleEditStyle, saveStyle} = this.props
+    const { actions, selectedStyle, styles, changeSelectedStyle, isEditingStyle, toggleEditStyle, saveStyle} = this.props
     return (
       <div className='styleSelectContainer'>
+      <button onClick={()=>actions.menuViewToggleExpanded('styleSelect', false)}>-</button>
         {Object.keys(styles).map(style =>
           <div key={style} className='styleItem'><a href='#' onClick={() => changeSelectedStyle(style) } >{style}</a></div>)}
         {

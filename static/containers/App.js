@@ -12,14 +12,13 @@ import StaticView from '../components/StaticView'
 
 class App extends Component {
   componentDidMount() {
-    //console.log(this.props)
     const { actions } = this.props
     actions.recipesFetch(1)
     actions.menusFetch()
-
   }
   render() {
-    const { view, actions, recipes, categories, selectedStyle, styles, isEditingStyle, urlHash, savedMenus } = this.props
+    const { view, actions, recipes, categories, selectedStyle, styles, 
+            isEditingStyle, urlHash, savedMenus, menuViewExpandedItems } = this.props
     return (
       <div className='appContainer'>
         {(() => {
@@ -49,6 +48,7 @@ class App extends Component {
                       saveStyle={actions.saveStyle}
                       actions={actions}
                       savedMenus={savedMenus}
+                      menuViewExpandedItems={menuViewExpandedItems}
                     />
                     </div>)
             case "StaticView": return (
@@ -74,9 +74,9 @@ function mapStateToProps(state) {
     selectedStyle: state.styles.selectedStyle,
     styles: state.styles.styles,
     isEditingStyle: state.styles.isEditingStyle,
-    //staticMenu: state.application.savedMenus[urlHash],
     savedMenus: state.application.savedMenus,
-    urlHash: urlHash
+    urlHash: urlHash,
+    menuViewExpandedItems: state.application.menuViewExpandedItems
   }
 }
 
