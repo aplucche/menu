@@ -23,7 +23,9 @@ export const MENU_CREATE_START = 'MENU_CREATE_START'
 export const MENU_CREATE_SUCCESS = 'MENU_CREATE_SUCCESS'
 export const MENU_CREATE_ERROR = 'MENU_CREATE_ERROR'
 
-
+export const MENUS_FETCH_START = 'MENU_FETCH_START'
+export const MENUS_FETCH_SUCCESS = 'MENU_FETCH_SUCCESS'
+export const MENUS_FETCH_ERROR = 'MENU_FETCH_ERROR'
 //api actions
 const jsonHeaders = new Headers();
 jsonHeaders.append("Content-Type", 'application/json');
@@ -43,6 +45,32 @@ export function menuCreate(data, menuName) {
 export function menuCreateStart(menu) { return { type: MENU_CREATE_START, menu} }
 export function menuCreateSuccess(response) { return { type: MENU_CREATE_SUCCESS, data: JSON.stringify(response) }}
 export function menuCreateError(id) { return { type: MENU_CREATE_ERROR, id} }
+
+
+
+export function menusFetch() {
+  return dispatch => {
+    dispatch(menusFetchStart())
+    return fetch('../api/v1/menus')
+      .then(response => response.json())
+      .then(json => dispatch(menusFetchSuccess(json)))
+  }
+}
+
+export function menusFetchStart() { return {type: MENUS_FETCH_START } }
+export function menusFetchError() { return {type: MENUS_FETCH_ERROR} }
+
+export function menusFetchSuccess(json) {
+  //return as object with menu names as keys
+  const menuObject = {}
+  for (let menu of json) {
+    menuObject[menu.name] = JSON.parse(menu.data)
+  } 
+  return {
+    type: MENUS_FETCH_SUCCESS, 
+    data: menuObject
+  }
+}
 
 export function recipeUpdate(userId, id, recipe) {
   return dispatch => {

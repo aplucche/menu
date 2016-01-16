@@ -5,7 +5,8 @@ import Menu from './Menu'
 
 class MenuView extends Component {
   render() {
-    const { actions, recipes, categories, selectedStyle, styles, changeSelectedStyle, isEditingStyle, toggleEditStyle, saveStyle } = this.props
+    const { actions, recipes, categories, selectedStyle, styles, 
+            changeSelectedStyle, isEditingStyle, toggleEditStyle, saveStyle, savedMenus } = this.props
     return (
       <div className='menuViewContainer'>
         <StyleSelect selectedStyle={selectedStyle} 
@@ -19,7 +20,8 @@ class MenuView extends Component {
                     recipes={recipes}
                     categories={categories}
                     styles={styles}
-                    selectedStyle={selectedStyle}/>
+                    selectedStyle={selectedStyle}
+                    savedMenus={savedMenus}/>
         <Menu recipes={recipes} categories={categories} menuStyle={styles[selectedStyle]}/>
       </div>
       )

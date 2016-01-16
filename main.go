@@ -66,7 +66,7 @@ func main() {
 
 func GetMenus(c *gin.Context) {
 	var menus []Menu
-	_, err := dbmap.Select(&menus, "select * from menus")
+	_, err := dbmap.Select(&menus, "select * from menu")
 
 	if err == nil {
 		c.JSON(200, menus)

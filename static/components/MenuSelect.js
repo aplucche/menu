@@ -6,12 +6,20 @@ class MenuSelect extends Component {
     super(props)
     this.state = {expanded: false, showGeneratedLink: false}
   }
+
+  componentDidMount() {
+    this.props.actions.menusFetch()
+  }
   render() {
-    const { actions, recipes, categories, styles, selectedStyle } = this.props
+    const { actions, recipes, categories, styles, selectedStyle, savedMenus } = this.props
     const menuData = JSON.stringify({recipes: recipes, categories: categories, styles: styles, selectedStyle: selectedStyle})
 
     return (
       <div className='menuSaveContainer'>
+      <div className='savedMenuList' style={ (this.state.expanded===true) ? { 'display':'inline' }:{ 'display':'none' }}>
+        {Object.keys(savedMenus).map((menuName) => <li key={menuName}>{menuName}</li>)}
+
+      </div>
       <button className='toggleMenuSelect' 
         onClick={()=>this.setState({expanded: !this.state.expanded})}>{(this.state.expanded)?'-':'+'}</button><br />
       {(this.state.showGeneratedLink === true) ? 

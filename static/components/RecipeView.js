@@ -14,7 +14,7 @@ class RecipeView extends Component {
     }
   }
   render() {
-    const { recipes, categories, actions } = this.props
+    const { recipes, categories, actions} = this.props
 
     return (
       <div className='RecipeViewContainer'>
