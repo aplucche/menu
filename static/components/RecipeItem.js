@@ -11,16 +11,16 @@ class RecipeItem extends Component {
     this.setState( { expanded : !this.state.expanded } );
   }
   render() {
-    const { recipe, editItem, toggleSelected } = this.props
+    const { recipe, actions } = this.props
     const { expanded } = this.state
     return (
       <div className='listItemContainer'>
         <div className='listFirstRow'>
-          <input type='checkbox' checked={recipe.isSelected} onChange={ ()=>toggleSelected(recipe.id) }></input>
+          <input type='checkbox' checked={recipe.isSelected} onChange={ ()=>actions.toggleSelected(recipe.id) }></input>
           <div className='recipeName'>
             {recipe.name}
           </div>
-          <button className='editButton' onClick={ () => editItem(recipe.id) }>edit</button>
+          <button className='editButton' onClick={ () => actions.editItem(recipe.id) }>edit</button>
         </div>
         <div className='recipeDescription'>
           {recipe.description}

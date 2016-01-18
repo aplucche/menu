@@ -25,27 +25,20 @@ class App extends Component {
           switch (view) {
             case "RecipeView": return (
                   <div>
-                    <ViewSelect changeView={actions.changeView}/>
+                    <ViewSelect actions={actions}/>
                     <RecipeView recipes={recipes} 
                       categories={categories}
-                      editItem={actions.editItem}
-                      formCancelClick={actions.formCancelClick}
-                      formSaveClick={actions.formSaveClick}
-                      toggleSelected={actions.toggleSelected}
                       actions={actions}
                     />
                     </div>)
             case "MenuView": return (
                   <div>
-                    <ViewSelect changeView={actions.changeView}/>
+                    <ViewSelect actions={actions}/>
                     <MenuView recipes={recipes} 
                       selectedStyle={selectedStyle} 
                       styles={styles}
                       categories={categories}
                       isEditingStyle={isEditingStyle}
-                      changeSelectedStyle={actions.changeSelectedStyle}
-                      toggleEditStyle={actions.toggleEditStyle}
-                      saveStyle={actions.saveStyle}
                       actions={actions}
                       savedMenus={savedMenus}
                       menuViewExpandedItems={menuViewExpandedItems}

@@ -3,7 +3,6 @@ import fetch from 'isomorphic-fetch'
 //recipe actions
 export const EDIT_ITEM = 'EDIT_ITEM'
 export const FORM_CANCEL_CLICK = 'FORM_CANCEL_CLICK'
-export const FORM_SAVE_CLICK = 'FORM_SAVE_CLICK'
 export const TOGGLE_SELECTED = 'TOGGLE_SELECTED'
 export const ADD_RECIPE = 'ADD_RECIPE'
 
@@ -159,13 +158,10 @@ export function formCancelClick(id) {
   return { type: FORM_CANCEL_CLICK, id }
 }
 
-export function formSaveClick(id, updatedRecipe) {
-  return { type: FORM_SAVE_CLICK, id, updatedRecipe }
-}
-
 export function toggleSelected(id) {
   return { type: TOGGLE_SELECTED, id }
 }
+
 export function addRecipe(recipe) {
   return { type: ADD_RECIPE, recipe }
 }

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 class RecipeForm extends Component {
   render() {
-    const { actions, recipe, formCancelClick, formSaveClick, categories } = this.props
+    const { actions, recipe, categories } = this.props
     return (
       <div className='formContainer'>
         <div className='formButtonRow'>
@@ -17,7 +17,7 @@ class RecipeForm extends Component {
                 'userid' : 1
               }  
             )}>save</button>
-          <button className='formCancel' onClick={() => formCancelClick(recipe.id) }>cancel</button>
+          <button className='formCancel' onClick={() => actions.formCancelClick(recipe.id) }>cancel</button>
         </div>
         <label forHtml='recipeName'>Name:</label>
           <input name='recipeName' ref='recipeName' type='text' defaultValue={ recipe.name }/>

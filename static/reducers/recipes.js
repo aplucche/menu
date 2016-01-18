@@ -1,5 +1,4 @@
 import { EDIT_ITEM, 
-         FORM_SAVE_CLICK, 
          FORM_CANCEL_CLICK, 
          TOGGLE_SELECTED, 
          ADD_RECIPE, 
@@ -54,10 +53,6 @@ export default function recipes(state=initialState, action) {
     case EDIT_ITEM:
       return state.map(recipe =>
         (recipe.id===action.id) ? Object.assign({}, recipe, {'isEditing':true}) : recipe
-      )
-    case FORM_SAVE_CLICK:
-      return state.map(recipe => 
-        (recipe.id===action.id) ? Object.assign({}, recipe, action.updatedRecipe, {'isEditing':false}) : recipe
       )
     case FORM_CANCEL_CLICK:
       return state.map(recipe =>

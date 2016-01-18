@@ -8,17 +8,14 @@ import Menu from './Menu'
 class MenuView extends Component {
   render() {
     const { actions, recipes, categories, selectedStyle, styles, 
-            changeSelectedStyle, isEditingStyle, toggleEditStyle, saveStyle, savedMenus, menuViewExpandedItems } = this.props
+            isEditingStyle, savedMenus, menuViewExpandedItems } = this.props
     return (
       <div className='menuViewContainer'>
       {(menuViewExpandedItems.styleSelect === true) ?
         <StyleSelect actions={actions}
                      selectedStyle={selectedStyle} 
                      styles={styles} 
-                     changeSelectedStyle={changeSelectedStyle}
                      isEditingStyle={isEditingStyle}
-                     toggleEditStyle={toggleEditStyle}
-                     saveStyle={saveStyle}
                      />: 
         <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('styleSelect', true)}>
           <div className='menuViewSectionLabel'>Edit Style</div>
