@@ -6,7 +6,9 @@ class StyleSelect extends Component {
     const { actions, selectedStyle, styles, isEditingStyle } = this.props
     return (
       <div className='styleSelectContainer'>
-      <button onClick={()=>actions.menuViewToggleExpanded('styleSelect', false)}>-</button>
+        <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('styleSelect', false)}>
+          <div className='menuViewSectionLabel'>Edit Style</div>
+        </div>
         {Object.keys(styles).map(style =>
           <div key={style} className='styleItem'><a href='#' onClick={() => actions.changeSelectedStyle(style) } >{style}</a></div>)}
         {

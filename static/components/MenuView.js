@@ -7,7 +7,7 @@ import Menu from './Menu'
 
 class MenuView extends Component {
   render() {
-    const { actions, recipes, categories, selectedStyle, styles, 
+    const { actions, recipes, categories, selectedStyle, styles, headerData,
             isEditingStyle, savedMenus, menuViewExpandedItems } = this.props
     return (
       <div className='menuViewContainer'>
@@ -21,7 +21,7 @@ class MenuView extends Component {
           <div className='menuViewSectionLabel'>Edit Style</div>
         </div>}
       {(menuViewExpandedItems.headerSelect === true) ?
-        <HeaderSelect actions={actions}/>: 
+        <HeaderSelect actions={actions} headerData={headerData}/>: 
         <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('headerSelect', true)}>
           <div className='menuViewSectionLabel'>Edit Menu Headers</div>
         </div>}
@@ -35,9 +35,10 @@ class MenuView extends Component {
                     recipes={recipes}
                     categories={categories}
                     styles={styles}
+                    headerData ={headerData}
                     selectedStyle={selectedStyle}
                     savedMenus={savedMenus}/>
-        <Menu recipes={recipes} categories={categories} menuStyle={styles[selectedStyle]}/>
+        <Menu recipes={recipes} categories={categories} headerData={headerData} menuStyle={styles[selectedStyle]}/>
       </div>
       )
   }

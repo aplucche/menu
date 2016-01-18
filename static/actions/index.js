@@ -171,18 +171,24 @@ export function addRecipe(recipe) {
 export const CHANGE_SELECTED_STYLE = 'CHANGE_SELECTED_STYLE'
 export const TOGGLE_EDIT_STYLE = 'TOGGLE_EDIT_STYLE'
 export const SAVE_STYLE = 'SAVE_STYLE'
+export const SAVE_HEADER_DATA = 'SAVE_HEADER_DATA'
 
 export function changeSelectedStyle (style) {
-  return {type: CHANGE_SELECTED_STYLE, style}
+  return { type: CHANGE_SELECTED_STYLE, style }
 }
 
 export function toggleEditStyle () {
-  return {type: TOGGLE_EDIT_STYLE}
+  return { type: TOGGLE_EDIT_STYLE }
 }
 
 export function saveStyle (style, styleData) {
-  return {type: SAVE_STYLE, style, styleData}
+  return { type: SAVE_STYLE, style, styleData }
 }
+
+export function saveHeaderData (headerData) {
+  return { type: SAVE_HEADER_DATA, headerData }
+}
+
 
 
 //application

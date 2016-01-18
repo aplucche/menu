@@ -1,6 +1,11 @@
-import {CHANGE_SELECTED_STYLE, TOGGLE_EDIT_STYLE, SAVE_STYLE } from '../actions'
+import { CHANGE_SELECTED_STYLE, TOGGLE_EDIT_STYLE, SAVE_STYLE, SAVE_HEADER_DATA } from '../actions'
 
 const initialState = {
+    headerData: {
+      title: "example",
+      description: "an example",
+      date: "1/18/16"
+    },
     selectedStyle: 'basic',
     isEditingStyle: false,
     styles: {
@@ -14,11 +19,6 @@ const initialState = {
           alignItems: "center",
           width: 500,
           border: "1px solid oldlace"
-        },
-        menuHeader: {
-          title: "Today's Selection",
-          description: "",
-          date: "1/1/2016"
         },
         menuHeaderStyle : {
           display: "flex",
@@ -51,11 +51,6 @@ const initialState = {
         }
     },
       minimal: {
-        menuHeader: {
-          title: "",
-          description: "",
-          date: ""
-        },
         menuHeaderStyle : {},
         menuContainer: {color:'blue'},
         menuCategory: {},
@@ -76,6 +71,9 @@ export default function styles(state=initialState, action) {
     case SAVE_STYLE:
       const updatedStyles = Object.assign({}, state.styles, {[action.style]: JSON.parse(action.styleData)})
       return Object.assign({}, state, {styles: updatedStyles,'isEditingStyle': !state.isEditingStyle})
+    case SAVE_HEADER_DATA:
+      return Object.assign({}, state, {headerData: action.headerData})
+      return state  
     default:
       return state
   }

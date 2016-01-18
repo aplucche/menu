@@ -7,15 +7,15 @@ class MenuSave extends Component {
     this.state = {showGeneratedLink: false}
   }
   render() {
-    const { actions, recipes, categories, styles, selectedStyle, savedMenus } = this.props
-    const menuData = JSON.stringify({recipes: recipes, categories: categories, styles: styles, selectedStyle: selectedStyle})
-
+    const { actions, recipes, categories, styles, selectedStyle, savedMenus, headerData } = this.props
+    const menuData = JSON.stringify({recipes: recipes, categories: categories, styles: styles, selectedStyle: selectedStyle, headerData: headerData})
+    const currentURL = window.location.toString()
     return (
       <div className='menuSaveContainer'>
       {(this.state.showGeneratedLink === true) ? 
         <div>
         <div>Link: </div>
-        <input className='generatedLinkTextBox' type='text' readOnly  defaultValue={()=> window.location.toString() + '/' + ReactDOM.findDOMNode(this.refs.menuName).value}/>
+        <input className='generatedLinkTextBox' type='text' readOnly  defaultValue={()=> currentURL + '#' + ReactDOM.findDOMNode(this.refs.menuName).value}/>
         </div> :
         <div className='saveMenuForm'>
           <button onClick={ ()=> (actions.menuCreate(menuData, ReactDOM.findDOMNode(this.refs.menuName).value), this.setState({showGeneratedLink: true}))}>

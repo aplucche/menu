@@ -10,7 +10,9 @@ class MenuSelect extends Component {
 
     return (
       <div className='menuSelectContainer'>
-        <button onClick={()=>actions.menuViewToggleExpanded('menuSelect', false)}>-</button>
+        <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('menuSelect', false)}>
+          <div className='menuViewSectionLabel'>Select A Saved Menu</div>
+        </div>
         <div className='savedMenuList'>
           {Object.keys(savedMenus).map((menuName) => <li key={menuName}>{menuName}</li>)}
         </div>

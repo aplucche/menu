@@ -15,11 +15,11 @@ class StaticView extends Component {
     return { recipes: recipes, menuStyle: menuStyle }
   }
   render() {
-    const {savedMenus, urlHash, categories} = this.props
+    const {savedMenus, urlHash, categories, headerData } = this.props
     const menu = this.setMenuProperties(savedMenus, urlHash)
     console.log(menu)
     return (
-      <Menu recipes={menu.recipes} categories={categories} menuStyle={menu.menuStyle}/>
+      <Menu recipes={menu.recipes} categories={categories} headerData={headerData} menuStyle={menu.menuStyle}/>
     )
   }
 }

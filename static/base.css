@@ -106,6 +106,14 @@ input,textarea,button {
     border-radius: 3px;
 }
 
+.headerSelectContainer {
+    width:300px;
+}
+
+.menuSelectContainer {
+    width:300px;
+}
+
 .styleEditBox {
     width: 250px;
     margin-top: 10px;
@@ -156,4 +164,9 @@ input,textarea,button {
     justify-content: center;
     color: steelblue;
     font-weight: bold;
+}
+
+.headerFormContainer {
+    display: flex;
+    flex-flow: column nowrap;
 }
