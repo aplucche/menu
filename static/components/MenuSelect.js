@@ -14,7 +14,7 @@ class MenuSelect extends Component {
           <div className='menuViewSectionLabel'>Select A Saved Menu</div>
         </div>
         <div className='savedMenuList'>
-          {Object.keys(savedMenus).map((menuName) => <div><a onClick={ ()=>actions.loadSavedMenu(menuName, savedMenus[menuName]) } href='#' key={menuName}>{menuName}</a></div>)}
+          {Object.keys(savedMenus).map((menuName) => <div key={menuName}><a onClick={ ()=>actions.loadSavedMenu(menuName, savedMenus[menuName]) } href='#'>{menuName}</a></div>)}
         </div>
       </div>
     )
