@@ -1,10 +1,6 @@
 import { CHANGE_VIEW, MENUVIEW_TOGGLE_EXPANDED,
          MENU_CREATE_START, MENU_CREATE_SUCCESS, MENU_CREATE_ERROR, 
          MENUS_FETCH_START, MENUS_FETCH_SUCCESS, LOAD_SAVED_MENU } from '../actions'
-import SavedMenuData from '../dev/SavedMenuData'
-
-
-const savedMenuData = SavedMenuData
 
 const initialState = {
   view: 'RecipeView',
