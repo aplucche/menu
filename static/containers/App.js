@@ -14,6 +14,7 @@ class App extends Component {
   componentDidMount() {
     const { actions } = this.props
     actions.recipesFetch(1)
+    actions.changeSelectedStyle('basic')
     actions.menusFetch()
   }
   render() {

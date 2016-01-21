@@ -6,11 +6,6 @@ import MenuSave from './MenuSave'
 import Menu from './Menu'
 
 class MenuView extends Component {
-  componentDidMount() {
-    const {actions} = this.props
-    //load template data into selectedStyleData
-    actions.changeSelectedStyle('basic')
-  }
   render() {
     const { actions, recipes, categories, selectedStyle, styleTemplates, headerData, selectedStyleData,
             isEditingStyle, savedMenus, menuViewExpandedItems } = this.props
