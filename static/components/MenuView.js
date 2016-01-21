@@ -19,6 +19,7 @@ class MenuView extends Component {
       {(menuViewExpandedItems.styleSelect === true) ?
         <StyleSelect actions={actions}
                      selectedStyle={selectedStyle} 
+                     selectedStyleData={selectedStyleData}
                      styleTemplates={styleTemplates} 
                      isEditingStyle={isEditingStyle}
                      />: 

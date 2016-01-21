@@ -2,9 +2,9 @@ import { CHANGE_SELECTED_STYLE, TOGGLE_EDIT_STYLE, SAVE_STYLE, SAVE_HEADER_DATA,
 
 const initialState = {
     headerData: {
-      title: "example",
-      description: "an example",
-      date: "1/18/16"
+      title: "Today's Selection",
+      description: "",
+      date: ""
     },
     selectedStyle: 'basic',
     selectedStyleData: {},
@@ -72,14 +72,15 @@ export default function styles(state=initialState, action) {
       return Object.assign({}, state, {'isEditingStyle': !state.isEditingStyle})
     case SAVE_STYLE:
       return Object.assign({}, state, {
-               selectedStyleData: JSON.parse(action.styleData), 
-               selectedStyle: 'custom', 
-               isEditingStyle: !state.isEditingStyle, 
+                                   selectedStyleData: JSON.parse(action.styleData),
+                                   selectedStyle: 'custom',
+                                   isEditingStyle: !state.isEditingStyle
                                       })
     case SAVE_HEADER_DATA:
       return Object.assign({}, state, {headerData: action.headerData})
     case LOAD_SAVED_MENU:
       return Object.assign({}, state, {
+               selectedStyle: action.menuData.selectedStyle,
                selectedStyleData: action.menuData.selectedStyleData, 
                headerData: action.menuData.headerData, 
                                       })

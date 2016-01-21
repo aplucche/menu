@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 class StyleSelect extends Component {
   render() {
-    const { actions, selectedStyle, styleTemplates, isEditingStyle } = this.props
+    const { actions, selectedStyle, styleTemplates, isEditingStyle, selectedStyleData } = this.props
     return (
       <div className='styleSelectContainer'>
         <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('styleSelect', false)}>
@@ -22,7 +22,7 @@ class StyleSelect extends Component {
               <textarea className='styleEditBox' name='styleEditBox' 
                     ref='styleEditBox' 
                     rows='9' 
-                    defaultValue={ JSON.stringify(styleTemplates[selectedStyle], null, 4) }/>
+                    defaultValue={ JSON.stringify(selectedStyleData, null, 4) }/>
             </div>
           : <button onClick={() => actions.toggleEditStyle() } >Edit Selected Style</button>
         }

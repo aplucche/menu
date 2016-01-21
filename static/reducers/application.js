@@ -10,7 +10,6 @@ const initialState = {
   view: 'RecipeView',
   categories: ['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Cocktails'],
   savedMenus: {menu:{recipes:'', categories:'', selectedStyle:'',styles:''}},
-  selectedStyle: 'basic',
   menuViewExpandedItems: {styleSelect: false, headerSelect: false, savedMenuSelect: false}
 }
 
@@ -33,8 +32,6 @@ export default function application(state=initialState, action) {
         menuObject[menu.name] = JSON.parse(menu.data)
       }
       return Object.assign({}, state, { savedMenus: menuObject })
-    case LOAD_SAVED_MENU:
-      return Object.assign({}, state, {selectedStyle: action.menuData.selectedStyle})
     default:
       return state
   }
