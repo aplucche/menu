@@ -7,8 +7,12 @@ class MenuSave extends Component {
     this.state = {showGeneratedLink: false}
   }
   render() {
-    const { actions, recipes, categories, styles, selectedStyle, savedMenus, headerData } = this.props
-    const menuData = JSON.stringify({recipes: recipes, categories: categories, styles: styles, selectedStyle: selectedStyle, headerData: headerData})
+    const { actions, recipes, categories, selectedStyleData, selectedStyle, savedMenus, headerData } = this.props
+    const menuData = JSON.stringify({recipes: recipes.filter(recipe=>recipe.isSelected), 
+                                     categories: categories, 
+                                     selectedStyleData: selectedStyleData, 
+                                     selectedStyle: selectedStyle, 
+                                     headerData: headerData})
     const currentURL = window.location.toString()
     return (
       <div className='menuSaveContainer'>

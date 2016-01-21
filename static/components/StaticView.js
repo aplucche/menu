@@ -8,18 +8,20 @@ class StaticView extends Component {
       menuContainer: {}, 
       menuHeader: {}
     }
+    var headerData={}
     if(urlHash in savedMenus && urlHash!=='') {
       recipes = savedMenus[urlHash].recipes
-      menuStyle = savedMenus[urlHash].styles[savedMenus[urlHash].selectedStyle]
+      menuStyle = savedMenus[urlHash].selectedStyleData
+      headerData = savedMenus[urlHash].headerData
     }
-    return { recipes: recipes, menuStyle: menuStyle }
+    return { recipes: recipes, menuStyle: menuStyle, headerData: headerData }
   }
   render() {
-    const {savedMenus, urlHash, categories, headerData } = this.props
+    const {savedMenus, urlHash, categories } = this.props
     const menu = this.setMenuProperties(savedMenus, urlHash)
     console.log(menu)
     return (
-      <Menu recipes={menu.recipes} categories={categories} headerData={headerData} menuStyle={menu.menuStyle}/>
+      <Menu recipes={menu.recipes} categories={categories} headerData={menu.headerData} menuStyle={menu.menuStyle}/>
     )
   }
 }

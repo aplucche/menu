@@ -1,4 +1,4 @@
-import { CHANGE_SELECTED_STYLE, TOGGLE_EDIT_STYLE, SAVE_STYLE, SAVE_HEADER_DATA } from '../actions'
+import { CHANGE_SELECTED_STYLE, TOGGLE_EDIT_STYLE, SAVE_STYLE, SAVE_HEADER_DATA, LOAD_SAVED_MENU } from '../actions'
 
 const initialState = {
     headerData: {
@@ -7,8 +7,10 @@ const initialState = {
       date: "1/18/16"
     },
     selectedStyle: 'basic',
+    selectedStyleData: {},
     isEditingStyle: false,
-    styles: {
+    isCustomStyle: false,
+    styleTemplates: {
       basic: {
         menuContainer: {
           fontFamily: "Merriweather",
@@ -65,15 +67,18 @@ const initialState = {
 export default function styles(state=initialState, action) {
   switch(action.type) {
     case CHANGE_SELECTED_STYLE:
-      return Object.assign({}, state, {'selectedStyle': action.style})
+      return Object.assign({}, state, {selectedStyle: action.style, selectedStyleData: state.styleTemplates[action.style]})
     case TOGGLE_EDIT_STYLE:
       return Object.assign({}, state, {'isEditingStyle': !state.isEditingStyle})
     case SAVE_STYLE:
-      const updatedStyles = Object.assign({}, state.styles, {[action.style]: JSON.parse(action.styleData)})
-      return Object.assign({}, state, {styles: updatedStyles,'isEditingStyle': !state.isEditingStyle})
+      return Object.assign({}, state, {selectedStyleData: JSON.parse(action.styleData), 
+                                       selectedStyle: 'custom', 
+                                       isEditingStyle: !state.isEditingStyle, 
+                                       isCustomStyle: true})
     case SAVE_HEADER_DATA:
       return Object.assign({}, state, {headerData: action.headerData})
-      return state  
+    case LOAD_SAVED_MENU:
+      return state
     default:
       return state
   }

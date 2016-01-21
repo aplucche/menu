@@ -6,15 +6,20 @@ import MenuSave from './MenuSave'
 import Menu from './Menu'
 
 class MenuView extends Component {
+  componentDidMount() {
+    const {actions} = this.props
+    //load template data into selectedStyleData
+    actions.changeSelectedStyle('basic')
+  }
   render() {
-    const { actions, recipes, categories, selectedStyle, styles, headerData,
+    const { actions, recipes, categories, selectedStyle, styleTemplates, headerData, selectedStyleData,
             isEditingStyle, savedMenus, menuViewExpandedItems } = this.props
     return (
       <div className='menuViewContainer'>
       {(menuViewExpandedItems.styleSelect === true) ?
         <StyleSelect actions={actions}
                      selectedStyle={selectedStyle} 
-                     styles={styles} 
+                     styleTemplates={styleTemplates} 
                      isEditingStyle={isEditingStyle}
                      />: 
         <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('styleSelect', true)}>
@@ -34,11 +39,11 @@ class MenuView extends Component {
         <MenuSave actions={actions}
                     recipes={recipes}
                     categories={categories}
-                    styles={styles}
                     headerData ={headerData}
                     selectedStyle={selectedStyle}
+                    selectedStyleData={selectedStyleData}
                     savedMenus={savedMenus}/>
-        <Menu recipes={recipes} categories={categories} headerData={headerData} menuStyle={styles[selectedStyle]}/>
+        <Menu recipes={recipes} categories={categories} headerData={headerData} menuStyle={selectedStyleData}/>
       </div>
       )
   }

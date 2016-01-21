@@ -17,7 +17,7 @@ class App extends Component {
     actions.menusFetch()
   }
   render() {
-    const { view, actions, recipes, categories, selectedStyle, styles, headerData,
+    const { view, actions, recipes, categories, selectedStyle, styleTemplates, headerData, selectedStyleData,
             isEditingStyle, urlHash, savedMenus, menuViewExpandedItems } = this.props
     return (
       <div className='appContainer'>
@@ -36,12 +36,13 @@ class App extends Component {
                     <ViewSelect actions={actions}/>
                     <MenuView recipes={recipes} 
                       selectedStyle={selectedStyle} 
-                      styles={styles}
+                      styleTemplates={styleTemplates}
                       headerData={headerData}
                       categories={categories}
                       isEditingStyle={isEditingStyle}
                       actions={actions}
                       savedMenus={savedMenus}
+                      selectedStyleData={selectedStyleData}
                       menuViewExpandedItems={menuViewExpandedItems}
                     />
                     </div>)
@@ -67,7 +68,8 @@ function mapStateToProps(state) {
     categories: state.application.categories,
     recipes: state.recipes,
     selectedStyle: state.styles.selectedStyle,
-    styles: state.styles.styles,
+    selectedStyleData: state.styles.selectedStyleData,
+    styleTemplates: state.styles.styleTemplates,
     headerData: state.styles.headerData,
     isEditingStyle: state.styles.isEditingStyle,
     savedMenus: state.application.savedMenus,

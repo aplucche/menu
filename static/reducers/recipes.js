@@ -2,6 +2,7 @@ import { EDIT_ITEM,
          FORM_CANCEL_CLICK, 
          TOGGLE_SELECTED, 
          ADD_RECIPE, 
+         LOAD_SAVED_MENU,
          RECIPES_FETCH_START,
          RECIPES_FETCH_SUCCESS,
          RECIPES_FETCH_ERROR,
@@ -76,6 +77,8 @@ export default function recipes(state=initialState, action) {
           isEditing : false
         } 
       ]
+    case LOAD_SAVED_MENU:
+      return state
     default:
       return state
   }

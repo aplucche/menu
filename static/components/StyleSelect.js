@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom'
 
 class StyleSelect extends Component {
   render() {
-    const { actions, selectedStyle, styles, isEditingStyle } = this.props
+    const { actions, selectedStyle, styleTemplates, isEditingStyle } = this.props
     return (
       <div className='styleSelectContainer'>
         <div className='menuViewSection' onClick={()=>actions.menuViewToggleExpanded('styleSelect', false)}>
           <div className='menuViewSectionLabel'>Edit Style</div>
         </div>
-        {Object.keys(styles).map(style =>
+        <div className='currentStyle'> {'current style: ' + selectedStyle}</div>
+        {Object.keys(styleTemplates).map(style =>
           <div key={style} className='styleItem'><a href='#' onClick={() => actions.changeSelectedStyle(style) } >{style}</a></div>)}
         {
           (isEditingStyle === true)
@@ -21,7 +22,7 @@ class StyleSelect extends Component {
               <textarea className='styleEditBox' name='styleEditBox' 
                     ref='styleEditBox' 
                     rows='9' 
-                    defaultValue={ JSON.stringify(styles[selectedStyle], null, 4) }/>
+                    defaultValue={ JSON.stringify(styleTemplates[selectedStyle], null, 4) }/>
             </div>
           : <button onClick={() => actions.toggleEditStyle() } >Edit Selected Style</button>
         }

@@ -202,3 +202,9 @@ export function changeView(viewName) {
 export function menuViewToggleExpanded(menuViewItem, option) {
   return {type: MENUVIEW_TOGGLE_EXPANDED, menuViewItem, option}
 }
+
+export const LOAD_SAVED_MENU = 'LOAD_SAVED_MENU'
+
+export function loadSavedMenu(menuName, menuData) {
+  return {type: LOAD_SAVED_MENU , menuName, menuData }
+}

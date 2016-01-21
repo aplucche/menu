@@ -170,3 +170,10 @@ input,textarea,button {
     display: flex;
     flex-flow: column nowrap;
 }
+
+.currentStyle {
+    display: flex;
+    justify-content: center;
+    color: ghostwhite;
+    background: darkgray;
+}
