@@ -2,6 +2,9 @@ import React, { Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 
 class HeaderSelect extends Component {
+  saveHeaders() {
+    actions.menuViewToggleExpanded('headerSelect', false)
+  }
   render() {
     const {actions, headerData} = this.props
     return (
@@ -17,13 +20,12 @@ class HeaderSelect extends Component {
           <label forHtml='headerDate'>Date:</label>
             <input name='headerDate' ref='headerDate' type='text' defaultValue={ headerData.date }/>
 
-          <button className='formSave' onClick={() => actions.saveHeaderData( 
-              {
-                'title': ReactDOM.findDOMNode(this.refs.headerTitle).value,
-                'description': ReactDOM.findDOMNode(this.refs.headerDescription).value,
-                'date': ReactDOM.findDOMNode(this.refs.headerDate).value
-              }  
-            )}>save</button>
+          <button className='formSave' onClick={() => (actions.saveHeaderData( 
+                  {
+                    'title': ReactDOM.findDOMNode(this.refs.headerTitle).value,
+                    'description': ReactDOM.findDOMNode(this.refs.headerDescription).value,
+                    'date': ReactDOM.findDOMNode(this.refs.headerDate).value
+                  }), actions.menuViewToggleExpanded('headerSelect', false))}>save</button>
         </div>
       </div>)
   }

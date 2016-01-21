@@ -71,14 +71,18 @@ export default function styles(state=initialState, action) {
     case TOGGLE_EDIT_STYLE:
       return Object.assign({}, state, {'isEditingStyle': !state.isEditingStyle})
     case SAVE_STYLE:
-      return Object.assign({}, state, {selectedStyleData: JSON.parse(action.styleData), 
-                                       selectedStyle: 'custom', 
-                                       isEditingStyle: !state.isEditingStyle, 
-                                       isCustomStyle: true})
+      return Object.assign({}, state, {
+               selectedStyleData: JSON.parse(action.styleData), 
+               selectedStyle: 'custom', 
+               isEditingStyle: !state.isEditingStyle, 
+                                      })
     case SAVE_HEADER_DATA:
       return Object.assign({}, state, {headerData: action.headerData})
     case LOAD_SAVED_MENU:
-      return state
+      return Object.assign({}, state, {
+               selectedStyleData: action.menuData.selectedStyleData, 
+               headerData: action.menuData.headerData, 
+                                      })
     default:
       return state
   }

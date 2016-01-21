@@ -17,7 +17,7 @@ class StaticView extends Component {
     return { recipes: recipes, menuStyle: menuStyle, headerData: headerData }
   }
   render() {
-    const {savedMenus, urlHash, categories } = this.props
+    const { savedMenus, urlHash, categories } = this.props
     const menu = this.setMenuProperties(savedMenus, urlHash)
     console.log(menu)
     return (
