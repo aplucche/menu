@@ -78,7 +78,10 @@ export default function recipes(state=initialState, action) {
         } 
       ]
     case LOAD_SAVED_MENU:
-      return state
+      const menu_ids = new Set(action.menuData.recipes.map(recipe=>recipe.id))
+      return state.map(recipe=>(menu_ids.has(recipe.id)===true) ? 
+                                  Object.assign({},recipe, {isSelected:true}):
+                                  Object.assign({},recipe, {isSelected:false}))
     default:
       return state
   }

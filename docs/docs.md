@@ -50,3 +50,6 @@ ___
 -categories
 -menuStyle
 -headerData
+
+###Save Behavior
+Note: Loading a recipe in menuView checks saved recipe ids against existing state and toggles isSelected accordingly.  If an item is modified it will load any modification in MenuView but will load recipes as they were when they were saved in StaticView.
