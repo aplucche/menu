@@ -2,6 +2,8 @@ package main
 
 import (
 	"database/sql"
+	"flag"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 	"gopkg.in/gorp.v1"
@@ -9,6 +11,12 @@ import (
 	"net/http"
 	"strconv"
 )
+
+//config using command line flags
+var dbUser = flag.String("dbuser", "golang", "db username")
+var dbPass = flag.String("dbpass", "password", "db password")
+var dbName = flag.String("dbname", "golang", "db name")
+var dbHost = flag.String("dbhost", "localhost", "db host")
 
 type Recipe struct {
 	Id          int64  `db:"id" json:"id"`
@@ -29,7 +37,11 @@ type Menu struct {
 var dbmap = initDb()
 
 func initDb() *gorp.DbMap {
-	db, err := sql.Open("postgres", "user=golang password=password dbname=golang host=localhost sslmode=disable")
+	flag.Parse()
+	connString := fmt.Sprintf("user=%s password=%s dbname=%s host=%s sslmode=disable",
+		*dbUser, *dbPass, *dbName, *dbHost)
+	fmt.Println(*dbUser, *dbPass, *dbName, *dbHost)
+	db, err := sql.Open("postgres", connString)
 	checkErr(err, "sql.Open failed")
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}
 	dbmap.AddTableWithName(Recipe{}, "Recipe").SetKeys(true, "Id")
