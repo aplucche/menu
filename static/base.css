@@ -180,3 +180,8 @@ input,textarea,button {
     color: ghostwhite;
     background: darkgray;
 }
+
+.menuContainer {
+    margin-left: auto;
+    margin-right: auto;
+
