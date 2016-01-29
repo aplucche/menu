@@ -4,7 +4,7 @@ import { CHANGE_VIEW, MENUVIEW_TOGGLE_EXPANDED,
 
 const initialState = {
   view: 'RecipeView',
-  categories: ['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Cocktails'],
+  categories: ['Appetizers', 'Entrees', 'Sides', 'Desserts', 'Drinks', 'Cocktails'],
   savedMenus: {menu:{recipes:'', categories:'', selectedStyle:'',styles:''}},
   menuViewExpandedItems: {styleSelect: false, headerSelect: false, savedMenuSelect: false}
 }
