@@ -4,10 +4,10 @@ import (
 	"database/sql"
 	"flag"
 	"fmt"
-	"github.com/gin-gonic/gin"
-	_ "github.com/lib/pq"
-	"gopkg.in/gorp.v1"
 	"log"
+	"menu/Godeps/_workspace/src/github.com/gin-gonic/gin"
+	_ "menu/Godeps/_workspace/src/github.com/lib/pq"
+	"menu/Godeps/_workspace/src/gopkg.in/gorp.v1"
 	"net/http"
 	"strconv"
 )

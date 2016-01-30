@@ -1,0 +1,46 @@
+{
+	"ImportPath": "menu",
+	"GoVersion": "go1.4",
+	"Deps": [
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.0rc1-148-g52fcc5d",
+			"Rev": "52fcc5dbf6e94df33ad313858fb94b713e9d1b4a"
+		},
+		{
+			"ImportPath": "github.com/lib/pq",
+			"Comment": "go1.0-cutoff-51-ga8d8d01",
+			"Rev": "a8d8d01c4f91602f876bf5aa210274e8203a6b45"
+		},
+		{
+			"ImportPath": "github.com/manucorporat/sse",
+			"Rev": "fe6ea2c8e398672518ef204bf0fbd9af858d0e15"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-colorable",
+			"Rev": "3dac7b4f76f6e17fb39b768b89e3783d16e237fe"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Rev": "3f7a6730f55096ff7cd34816f520d9f4517e95ea"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "1796f9b8b7178e3c7587dff118d3bb9d37f9b0b3"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "eb2c74142fd19a79b3f237334c7384d5167b1b46"
+		},
+		{
+			"ImportPath": "gopkg.in/bluesuncorp/validator.v5",
+			"Comment": "v5.12",
+			"Rev": "d5acf1dac43705f8bfbb71d878e290e2bed3950b"
+		},
+		{
+			"ImportPath": "gopkg.in/gorp.v1",
+			"Comment": "v1.7.1",
+			"Rev": "c87af80f3cc5036b55b83d77171e156791085e2e"
+		}
+	]
+}
