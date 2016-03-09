@@ -40,7 +40,6 @@ func initDb() *gorp.DbMap {
 	flag.Parse()
 	connString := fmt.Sprintf("user=%s password=%s dbname=%s host=%s sslmode=disable",
 		*dbUser, *dbPass, *dbName, *dbHost)
-	fmt.Println(*dbUser, *dbPass, *dbName, *dbHost)
 	db, err := sql.Open("postgres", connString)
 	checkErr(err, "sql.Open failed")
 	dbmap := &gorp.DbMap{Db: db, Dialect: gorp.PostgresDialect{}}

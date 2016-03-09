@@ -11,7 +11,7 @@ const initialState = {
     selectedStyleData: {},
     isEditingStyle: false,
     isCustomStyle: false,
-    styleTemplates: styleTemplates 
+    styleTemplates: styleTemplates
 }
 
 export default function styles(state=initialState, action) {
