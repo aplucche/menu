@@ -1,0 +1,29 @@
+const path = require('path');
+var webpack = require('webpack');
+
+module.exports = {
+  entry: './static/index.js',
+  output: {
+    path: path.join(__dirname, 'static'),
+    filename: 'bundle.js'
+  },
+  devServer: {
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:8080'
+      }
+    }
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+  }
+};
