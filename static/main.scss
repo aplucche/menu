@@ -1,0 +1,23 @@
+$text-color: #131516; //jet black
+
+body {
+  font: 100% Helvetica,san-serif;
+  color: $text-color;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}

@@ -8,6 +8,8 @@ import rootReducer from './reducers'
 import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
 
+import './main.scss'
+
 const logger = createLogger({ collapsed: true })
 const createStoreWithMiddleware = applyMiddleware(thunk, logger)(createStore)
 let store = createStoreWithMiddleware(rootReducer)
